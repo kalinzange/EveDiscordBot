@@ -1,1 +1,3 @@
 # EveDiscordBot
+
+Santos Best Developer
