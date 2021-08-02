@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/kalinzange/EveDiscordBot#readme",
   "dependencies": {
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "ytdl-core": "^4.9.0"
   }
 }
