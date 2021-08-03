@@ -14,6 +14,7 @@ Requirements:
  - [FFMPEG](https://www.youtube.com/watch?v=r1AtmY-RMyQ&t=35s)
 
  - Oppusscript
+ 
  ```npm i opusscript```
 
 ## Event Handler
