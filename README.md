@@ -2,23 +2,33 @@
 
 ## Music Discord Bot
 
-Requirements:
- - ytdl-core
+- Requirements:
+	- ytdl-core
 
- ```npm install ytdl-core```
-
- - Youtube Search
-
- ```npm install yt-search```
-
- - [FFMPEG](https://www.youtube.com/watch?v=r1AtmY-RMyQ&t=35s)
-
- - Oppusscript
+ 	```
+ 	npm install ytdl-core
+ 	```
  
- ```npm i opusscript```
+	- Youtube Search
+
+	```
+	npm install yt-search
+	```
+
+	- Oppusscript
+ 
+	```
+	npm i opusscript
+	```
+
+	- [FFMPEG](https://www.youtube.com/watch?v=r1AtmY-RMyQ&t=35s)
+
+ 
 
 ## Event Handler
 
-Requirements:
- - FS
- `npm install fs`
+- Requirements:
+	- FS
+	```
+	npm install fs
+	```
