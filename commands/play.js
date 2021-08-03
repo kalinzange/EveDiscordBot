@@ -72,7 +72,7 @@ module.exports = {
 
             } else {
                 serverQueue.songs.push(song);
-                return message.channel.send(`\:mpengu: **${song.title}** adicionado à queue!`);
+                return message.channel.send(`<:mpengu:872164296484868138> **${song.title}** adicionado à queue!`);
             }
         } 
         
