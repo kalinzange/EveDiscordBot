@@ -1,5 +1,5 @@
 module.exports = (message, client, Discord) => {
-    const { prefix } = require ('./config.json');
+    const { prefix } = require ('../../config.json');
     
     if(!message.content.startsWith(prefix) || message.author.bot) return;
     const args = message.content.slice(prefix.length).split(/ +/);
