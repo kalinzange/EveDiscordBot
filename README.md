@@ -3,6 +3,12 @@
 ## Music Discord Bot
 
 - Requirements:
+	- discord.js
+
+ 	```
+ 	npm install discord.js
+ 	```
+
 	- ytdl-core
 
  	```
