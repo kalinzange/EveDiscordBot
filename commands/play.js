@@ -18,7 +18,7 @@ module.exports = {
         const serverQueue = queue.get(message.guild.id);
 
         if (cmd === 'play'){
-            if(!args.lenght) return message.channel.send('Como queres que coloque música se nem nome ou link colocaste?! :unamused: ');
+            if(!args.length) return message.channel.send('Como queres que coloque música se nem nome ou link colocaste?! :unamused: ');
             let song = {};
 
             if(ytdl.validateURL(args[0])) {
