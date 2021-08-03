@@ -1,12 +1,12 @@
-const ytdl = require("ytdl-core");
-const ytSearch = require("yt-search");
+const ytdl = require('ytdl-core');
+const ytSearch = require('yt-search');
 const queue = new Map();
 
 module.exports = {
     name: 'play',
     aliases: ['skip', 'stop'],
     description: 'play requested music',
-    async execute(client, message, args, Discord) {
+    async execute(message, args, cmd, client, Discord) {
 
         const voiceChannel = message.member.voice.channel;
         if(!voiceChannel) return message.channel.send('Precisas de estar em uma sala para executar este comando.');
