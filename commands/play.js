@@ -57,11 +57,14 @@ module.exports = {
                 queueContructor.songs.push(song);
 
                 try {
+
                     const connection = await voiceChannel.join();
                     queueContructor.connection = connection;
                     videoPlayer(message.guild, queueContructor.songs[0]);
-                } catch (err){
-                    queueDelete(message.guild.id);
+
+                } catch (err) {
+
+                    queue.delete(message.guild.id);
                     message.channel.send('Encontrei um erro ao conectar-me, entretanto apaguei a lista de queue');
                     throw err;
 
@@ -99,8 +102,8 @@ const videoPlayer = async (guild, song) => {
 }
 
 const skipSong = (message, serverQueue) => {
-    if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
-    if(!serverQueue) return message.channel.send('Não existe nenhuma música em queue');
+    if (!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
+    if (!serverQueue) return message.channel.send('Não existe nenhuma música em queue');
 
     serverQueue.connection.dispatcher.end();
 }
