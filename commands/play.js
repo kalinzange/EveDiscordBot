@@ -1,89 +1,112 @@
 const ytdl = require("ytdl-core");
+const ytSearch = require("yt-search");
 const queue = new Map();
 
 module.exports = {
     name: 'play',
+    aliases: ['skip', 'stop'],
     description: 'play requested music',
-    async execute(message) {
-        try {
-            const args = message.content.split(" ");
-            const queue = message.client.queue;
-            const serverQueue = message.client.queue.get(message.guild.id);
-            const voiceChannel = message.member.voice.channel;
+    async execute(client, message, args, Discord) {
 
-            if (!voiceChannel) return message.channel.send("Precisas de estar num voice channel para tocares música!");
-            
-            const permissions = voiceChannel.permissionsFor(message.client.user);
+        const voiceChannel = message.member.voice.channel;
+        if(!voiceChannel) return message.channel.send('Precisas de estar em uma sala para executar este comando.');
+        
+        const permissions = voiceChannel.permissionsFor(message.client.user);
+        if(!permissions.has('CONNECT')) return message.channel.send('Não tenho permissões para entrar nessa sala :(');
+        if(!permissions.has('SPEAK')) return message.channel.send('Não tenho permissões para falar nessa sala :(');
 
-            if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
-                return message.channel.send("Preciso de permissões para juntar-me a essa sala!");
+        const serverQueue = queue.get(message.guild.id);
+
+        if (cmd === 'play'){
+            if(!args.lenght) return message.channel.send('Como queres que coloque música se nem nome ou link colocaste?! :unamused: ');
+            let song = {};
+
+            if(ytdl.validateURL(args[0])) {
+
+                const songInfo = await ytdl.getInfo(args[0])
+                song = {title: songInfo.videoDetails.title, url:songInfo.videoDetails.video_url}
+
+            } else {
+
+                const videoFinder = async (query) => {
+                    const videoResult = await ytSearch(query);
+                    return (videoResult.videos.length > 1) ? videoResult.videos[0]:null;
+                }
+
+                const video = await videoFinder (args.join(' '));
+                if (video) {
+
+                    song = { title: video.title, url: video.url }
+
+                } else {
+
+                    message.channel.send('Erro ao encontrar o video');
+
+                }
             }
-      
-            const songInfo = await ytdl.getInfo(args[1]);
-            const song = {
-              title: songInfo.videoDetails.title,
-              url: songInfo.videoDetails.video_url
-            };
-      
-            if (!serverQueue) {
-                const queueContruct = {
-                    textChannel: message.channel,
+
+            if(!serverQueue) {
+                const queueContructor = {
                     voiceChannel: voiceChannel,
+                    textChannel: message.channel,
                     connection: null,
-                    songs: [],
-                    volume: 5,
-                    playing: true
-                };
-      
-                queue.set(message.guild.id, queueContruct);
-      
-                queueContruct.songs.push(song);
-      
+                    songs: []
+                }
+
+                queue.set(message.guild.id, queueContructor);
+                queueContructor.songs.push(song);
+
                 try {
-
-                    var connection = await voiceChannel.join();
-                    queueContruct.connection = connection;
-                    this.play(message, queueContruct.songs[0]);
-
-                } catch (err) {
-
-                    console.log(err);
-                    queue.delete(message.guild.id);
-                    return message.channel.send(err);
+                    const connection = await voiceChannel.join();
+                    queueContructor.connection = connection;
+                    videoPlayer(message.guild, queueContructor.songs[0]);
+                } catch (err){
+                    queueDelete(message.guild.id);
+                    message.channel.send('Encontrei um erro ao conectar-me, entretanto apaguei a lista de queue');
+                    throw err;
 
                 }
 
             } else {
                 serverQueue.songs.push(song);
-                return message.channel.send(`${song.title} foi adicionado há queue!`);
+                return message.channel.send(`:mpengu: **${song.title}** adicionado à queue!`);
             }
-
-        } catch (error) {
-            console.log(error);
-            message.channel.send(error.message);
-        }
-    },
-      
-    play(message, song) {
-        const queue = message.client.queue;
-        const guild = message.guild;
-        const serverQueue = queue.get(message.guild.id);
-      
-        if (!song) {
-            serverQueue.voiceChannel.leave();
-            queue.delete(guild.id);
-            return;
-        }
-      
-        const dispatcher = serverQueue.connection
-        .play(ytdl(song.url))
-        .on("finish", () => {
-            serverQueue.songs.shift();
-            this.play(message, serverQueue.songs[0]);
-        })
+        } 
         
-        .on("error", error => console.error(error));
-        dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
-        serverQueue.textChannel.send(`A Tocar _tuc tuc_: **${song.title}**`);
+        else if (cmd === 'skip') skipSong(message, serverQueue);
+        else if (cmd === 'stop') stopSong(message, serverQueue);
     }
+}
+
+const videoPlayer = async (guild, song) => {
+    const songQueue = queue.get(guild.id);
+
+    if(!song) {
+        songQueue.voiceChannel.leave();
+        queue.delete(guild.id);
+        return;
+    }
+
+    const stream = ytdl(song.url, {filter: 'audioonly'});
+    songQueue.connection.play(stream, {seek: 0, volume: 0.5})
+    .on('finish', () => {
+        songQueue.songs.shift();
+        videoPlayer(guild, songQueue.songs[0]);
+    });
+
+    await songQueue.textChannel.send(`:notes: A Tocar: **${song.title}**`);
+
+}
+
+const skipSong = (message, serverQueue) => {
+    if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
+    if(!serverQueue) return message.channel.send('Não existe nenhuma música em queue');
+
+    serverQueue.connection.dispatcher.end();
+}
+
+const stopSong = (message, serverQueue) => {
+    if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
+    serverQueue.songs = [];
+    serverQueue.connection.dispatcher.end();
 }
