@@ -5,7 +5,7 @@ const queue = new Map();
 module.exports = {
     name: 'play',
     aliases: ['skip', 'stop'],
-    description: 'play requested music',
+    description: 'Play requested musics',
     async execute(message, args, cmd, client, Discord) {
         const mpengu = client.emojis.cache.get("871833279609839626")
 
