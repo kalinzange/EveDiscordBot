@@ -7,6 +7,7 @@ module.exports = {
     aliases: ['skip', 'stop'],
     description: 'play requested music',
     async execute(message, args, cmd, client, Discord) {
+        const mpengu = client.emojis.cache.get("871833279609839626")
 
         const voiceChannel = message.member.voice.channel;
         if(!voiceChannel) return message.channel.send('Precisas de estar em uma sala para executar este comando.');
@@ -72,7 +73,7 @@ module.exports = {
 
             } else {
                 serverQueue.songs.push(song);
-                return message.channel.send(`\:mpengu:872164296484868138 **${song.title}** adicionado à queue!`);
+                return message.channel.send(`${mpengu} **${song.title}** adicionado à queue!`);
             }
         } 
         
