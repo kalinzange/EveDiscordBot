@@ -2,6 +2,7 @@ module.exports = {
     name: 'a',
     description: 'Nothing',
     execute(message, args, cmd, client, Discord) {
-        message.channel.send(':mpengu:872164296484868138');
+        const emoji = client.emojis.cache.get("871833279609839626")
+        message.channel.send(`${emoji}`);
     }
 }
