@@ -7,6 +7,12 @@
  	```
  	npm install discord.js
  	```
+	
+	- Images-Scraper
+	
+	```
+	npm install images-scraper
+	´´´
 
 ## Music Discord Bot
 
