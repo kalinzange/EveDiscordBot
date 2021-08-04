@@ -29,7 +29,13 @@
 	```
 	npm install opusscript
 	```
-
+	
+	- Distube
+	
+	```
+	npm install distube
+	```
+	
 	- [FFMPEG](https://www.youtube.com/watch?v=r1AtmY-RMyQ&t=35s)
 
  
