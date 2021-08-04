@@ -1,8 +1,17 @@
 # EveDiscordBot
 
+- Requirements:
+
+	- discord.js
+
+ 	```
+ 	npm install discord.js
+ 	```
+
 ## Music Discord Bot
 
 - Requirements:
+
 	- ytdl-core
 
  	```
@@ -18,7 +27,7 @@
 	- Oppusscript
  
 	```
-	npm i opusscript
+	npm install opusscript
 	```
 
 	- [FFMPEG](https://www.youtube.com/watch?v=r1AtmY-RMyQ&t=35s)
