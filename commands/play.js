@@ -120,12 +120,14 @@ const videoPlayer = async (guild, song) => {
 const skipSong = (message, serverQueue) => {
     if (!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
     if (!serverQueue) return message.channel.send('Não existe nenhuma música em queue');
+    
     serverQueue.connection.dispatcher.end();
 }
 
 const stopSong = (message, serverQueue) => {
     if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
     if(!serverQueue) return message.channel.send('Não existem músicas em queue');
+    
     serverQueue.songs = [];
     serverQueue.connection.dispatcher.end();
 }
@@ -133,12 +135,15 @@ const stopSong = (message, serverQueue) => {
 const pauseSong = (message, serverQueue) => {
     if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
     if(serverQueue.connection.dispatcher.paused) return message.channel.send("A música já está pausada!");
+    
     serverQueue.connection.dispatcher.pause();
     message.channel.send("Pausei a música!");
 }
 
 const resumeSong = (message, serverQueue) => {
+    if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
     if(!serverQueue.connection.dispatcher.paused) return message.channel.send("Música não está pausada!");
+    
     serverQueue.connection.dispatcher.resume();
     message.channel.send("Rock n' Roll! :D");
 }
