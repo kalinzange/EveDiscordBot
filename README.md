@@ -12,7 +12,7 @@
 	
 	```
 	npm install images-scraper
-	´´´
+	```
 
 ## Music Discord Bot
 
