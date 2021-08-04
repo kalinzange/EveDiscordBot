@@ -19,7 +19,7 @@ module.exports = {
         const serverQueue = queue.get(message.guild.id);
 
         switch (cmd) {
-            case play:
+            case 'play':
                 if(!args.length) return message.channel.send('Como queres que coloque música se nem nome ou link colocaste?! :unamused: ');
                 let song = {};
 
@@ -78,19 +78,19 @@ module.exports = {
                 }
                 break;
             
-            case skip:
+            case 'skip':
                 skipSong(message, serverQueue);
                 break;
 
-            case stop:
+            case 'stop':
                 stopSong(message, serverQueue);
                 break;
 
-            case pause:
+            case 'pause':
                 pauseSong(message, serverQueue);
                 break;
 
-            case resume:
+            case 'resume':
                 resumeSong(message, serverQueue);
                 break;
         }
