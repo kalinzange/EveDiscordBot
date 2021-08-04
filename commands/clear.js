@@ -8,7 +8,8 @@ module.exports = {
         if(args[0] < 1) return message.reply('precisas apagar no mínimo 1 mensagem :unamused: ');
 
         await message.channel.messages.fetch({limit: args[0]}).then(messages => {
-            message.channel.bulkDelete(messages);
+            message.channel.bulkDelete(messages).
+            catch((err) => message.reply('mensagens enviadas há mais de 14 dias não podem ser apagadas :unamused: '));
         });
     }
 }
