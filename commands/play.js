@@ -111,6 +111,7 @@ const skipSong = (message, serverQueue) => {
 
 const stopSong = (message, serverQueue) => {
     if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
+    if(!serverQueue) return message.channel.send('Não existem músicas em queue');
     serverQueue.songs = [];
     serverQueue.connection.dispatcher.end();
 }
