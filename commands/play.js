@@ -139,6 +139,6 @@ const pauseSong = (message, serverQueue) => {
 
 const resumeSong = (message, serverQueue) => {
     if(!serverQueue.connection.dispatcher.paused) return message.channel.send("Música não está pausada!");
-    serverQueue.connection.dispatcher.play(song);
+    serverQueue.connection.dispatcher.resume();
     message.channel.send("Rock n' Roll! :D");
 }
