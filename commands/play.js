@@ -132,18 +132,18 @@ const stopSong = (message, serverQueue) => {
     serverQueue.connection.dispatcher.end();
 }
 
-const pauseSong = (message, serverQueue) => {
-    if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
-    if(serverQueue.connection.dispatcher.paused) return message.channel.send("A música já está pausada!");
+// const pauseSong = (message, serverQueue) => {
+//     if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
+//     if(serverQueue.connection.dispatcher.paused) return message.channel.send("A música já está pausada!");
     
-    serverQueue.connection.dispatcher.pause();
-    message.channel.send("Pausei a música!");
-}
+//     serverQueue.connection.dispatcher.pause();
+//     message.channel.send("Pausei a música!");
+// }
 
-const resumeSong = (message, serverQueue) => {
-    if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
-    if(!serverQueue.connection.dispatcher.paused) return message.channel.send("Música não está pausada!");
+// const resumeSong = (message, serverQueue) => {
+//     if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
+//     if(!serverQueue.connection.dispatcher.paused) return message.channel.send("Música não está pausada!");
     
-    serverQueue.connection.dispatcher.resume();
-    message.channel.send("Rock n' Roll! :D");
-}
+//     serverQueue.connection.dispatcher.resume();
+//     message.channel.send("Rock n' Roll! :D");
+// }
