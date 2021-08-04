@@ -76,23 +76,23 @@ module.exports = {
                     serverQueue.songs.push(song);
                     return message.channel.send(`${mpengu} **${song.title}** adicionado à queue!`);
                 }
-                break;
+            break;
             
             case 'skip':
                 skipSong(message, serverQueue);
-                break;
+            break;
 
             case 'stop':
                 stopSong(message, serverQueue);
-                break;
+            break;
 
             case 'pause':
                 pauseSong(message, serverQueue);
-                break;
+            break;
 
             case 'resume':
                 resumeSong(message, serverQueue);
-                break;
+            break;
         }
     }
 }
@@ -139,6 +139,6 @@ const pauseSong = (message, serverQueue) => {
 
 const resumeSong = (message, serverQueue) => {
     if(!serverQueue.connection.dispatcher.paused) return message.channel.send("Música não está pausada!");
-    serverQueue.connection.dispatcher.resume()
-    message.channel.send("Rock n' Roll! :D")
+    serverQueue.connection.dispatcher.resume();
+    message.channel.send("Rock n' Roll! :D");
 }
