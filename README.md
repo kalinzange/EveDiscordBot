@@ -35,6 +35,12 @@
 	```
 	npm install opusscript
 	```
+
+	- Spotify url info
+	```
+	npm install spotify-url-info
+	```
+
 	
 	- [FFMPEG](https://www.youtube.com/watch?v=r1AtmY-RMyQ&t=35s)
 

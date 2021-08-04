@@ -1,5 +1,8 @@
 const ytdl = require('ytdl-core');
 const ytSearch = require('yt-search');
+var { getData, getPreview } = require("spotify-url-info");
+var parsed, uri;
+
 const queue = new Map();
 
 module.exports = {
@@ -28,6 +31,27 @@ module.exports = {
                     const songInfo = await ytdl.getInfo(args[0])
                     song = {title: songInfo.videoDetails.title, url:songInfo.videoDetails.video_url}
 
+                } else if (args[0].includes('spotify')) {
+
+                    const spotifyTrackInfo = await getPreview(args[0]);
+
+                    const videoFinder = async (query) => {
+                        const videoResult = await ytSearch(query);
+                        return videoResult.videos.length > 1 ? videoResult.videos[0] : null;
+                    }
+
+                    const video = await videoFinder(`${spotifyTrackInfo.title} ${spotifyTrackInfo.artist}`);
+                    
+                    if (video) {
+
+                        song = { title: video.title, url: video.url };
+
+                    } else {
+
+                        message.channel.send('Erro ao encontrar a música.');
+                        
+                    }
+
                 } else {
 
                     const videoFinder = async (query) => {
@@ -36,6 +60,7 @@ module.exports = {
                     }
 
                     const video = await videoFinder (args.join(' '));
+
                     if (video) {
 
                         song = { title: video.title, url: video.url }
