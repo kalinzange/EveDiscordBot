@@ -4,7 +4,7 @@ const queue = new Map();
 
 module.exports = {
     name: 'play',
-    aliases: ['skip', 'stop'],
+    aliases: ['skip', 'stop', 'pause', 'resume'],
     description: 'Play requested musics',
     async execute(message, args, cmd, client, Discord) {
         const mpengu = client.emojis.cache.get("871833279609839626")
@@ -18,67 +18,82 @@ module.exports = {
 
         const serverQueue = queue.get(message.guild.id);
 
-        if (cmd === 'play'){
-            if(!args.length) return message.channel.send('Como queres que coloque música se nem nome ou link colocaste?! :unamused: ');
-            let song = {};
+        switch (cmd) {
+            case play:
+                if(!args.length) return message.channel.send('Como queres que coloque música se nem nome ou link colocaste?! :unamused: ');
+                let song = {};
 
-            if(ytdl.validateURL(args[0])) {
+                if(ytdl.validateURL(args[0])) {
 
-                const songInfo = await ytdl.getInfo(args[0])
-                song = {title: songInfo.videoDetails.title, url:songInfo.videoDetails.video_url}
-
-            } else {
-
-                const videoFinder = async (query) => {
-                    const videoResult = await ytSearch(query);
-                    return (videoResult.videos.length > 1) ? videoResult.videos[0]:null;
-                }
-
-                const video = await videoFinder (args.join(' '));
-                if (video) {
-
-                    song = { title: video.title, url: video.url }
+                    const songInfo = await ytdl.getInfo(args[0])
+                    song = {title: songInfo.videoDetails.title, url:songInfo.videoDetails.video_url}
 
                 } else {
 
-                    message.channel.send('Erro ao encontrar o video');
+                    const videoFinder = async (query) => {
+                        const videoResult = await ytSearch(query);
+                        return (videoResult.videos.length > 1) ? videoResult.videos[0]:null;
+                    }
 
-                }
-            }
+                    const video = await videoFinder (args.join(' '));
+                    if (video) {
 
-            if(!serverQueue) {
-                const queueContructor = {
-                    voiceChannel: voiceChannel,
-                    textChannel: message.channel,
-                    connection: null,
-                    songs: []
-                }
+                        song = { title: video.title, url: video.url }
 
-                queue.set(message.guild.id, queueContructor);
-                queueContructor.songs.push(song);
+                    } else {
 
-                try {
+                        message.channel.send('Erro ao encontrar o video');
 
-                    const connection = await voiceChannel.join();
-                    queueContructor.connection = connection;
-                    videoPlayer(message.guild, queueContructor.songs[0]);
-
-                } catch (err) {
-
-                    queue.delete(message.guild.id);
-                    message.channel.send('Encontrei um erro ao conectar-me, entretanto apaguei a lista de queue');
-                    throw err;
-
+                    }
                 }
 
-            } else {
-                serverQueue.songs.push(song);
-                return message.channel.send(`${mpengu} **${song.title}** adicionado à queue!`);
-            }
-        } 
-        
-        else if (cmd === 'skip') skipSong(message, serverQueue);
-        else if (cmd === 'stop') stopSong(message, serverQueue);
+                if(!serverQueue) {
+                    const queueContructor = {
+                        voiceChannel: voiceChannel,
+                        textChannel: message.channel,
+                        connection: null,
+                        songs: []
+                    }
+
+                    queue.set(message.guild.id, queueContructor);
+                    queueContructor.songs.push(song);
+
+                    try {
+
+                        const connection = await voiceChannel.join();
+                        queueContructor.connection = connection;
+                        videoPlayer(message.guild, queueContructor.songs[0]);
+
+                    } catch (err) {
+
+                        queue.delete(message.guild.id);
+                        message.channel.send('Encontrei um erro ao conectar-me, entretanto apaguei a lista de queue');
+                        throw err;
+
+                    }
+
+                } else {
+                    serverQueue.songs.push(song);
+                    return message.channel.send(`${mpengu} **${song.title}** adicionado à queue!`);
+                }
+                break;
+            
+            case skip:
+                skipSong(message, serverQueue);
+                break;
+
+            case stop:
+                stopSong(message, serverQueue);
+                break;
+
+            case pause:
+                pauseSong(message, serverQueue);
+                break;
+
+            case resume:
+                resumeSong(message, serverQueue);
+                break;
+        }
     }
 }
 
@@ -105,12 +120,25 @@ const videoPlayer = async (guild, song) => {
 const skipSong = (message, serverQueue) => {
     if (!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
     if (!serverQueue) return message.channel.send('Não existe nenhuma música em queue');
-
     serverQueue.connection.dispatcher.end();
 }
 
 const stopSong = (message, serverQueue) => {
     if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
+    if(!serverQueue) return message.channel.send('Não existem músicas em queue');
     serverQueue.songs = [];
     serverQueue.connection.dispatcher.end();
+}
+
+const pauseSong = (message, serverQueue) => {
+    if(!message.member.voice.channel) return message.channel.send('Precisas de estar num canal para executar este comando');
+    if(serverQueue.connection.dispatcher.paused) return message.channel.send("A música já está pausada!");
+    serverQueue.connection.dispatcher.pause();
+    message.channel.send("Pausei a música!");
+}
+
+const resumeSong = (message, serverQueue) => {
+    if(!serverQueue.connection.dispatcher.paused) return message.channel.send("Música não está pausada!");
+    serverQueue.connection.dispatcher.resume()
+    message.channel.send("Rock n' Roll! :D")
 }
