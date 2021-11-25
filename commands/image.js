@@ -1,5 +1,6 @@
-const Scraper = require("images-scraper");
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { MessageEmbed } = require("discord.js");
+const Scraper = require("images-scraper");
 
 const google = new Scraper({
   puppeteer: {
@@ -19,12 +20,28 @@ module.exports = {
     ),
   async execute(interaction) {
     await interaction.reply(
-      "Searching for **" + interaction.options.getString("search") + "**"
+      "Searching for **" +
+        interaction.options.getString("search").charAt(0).toUpperCase() +
+        interaction.options.getString("search").slice(1) +
+        "**"
     );
     const imageResults = await google.scrape(
       interaction.options.getString("search"),
       1
     );
-    await interaction.editReply(imageResults[0].url);
+    const embed = new MessageEmbed()
+      .setColor("#0099ff")
+      .setTitle(
+        "Searched for **" +
+          interaction.options.getString("search").charAt(0).toUpperCase() +
+          interaction.options.getString("search").slice(1) +
+          "** 🔍"
+      )
+      .setURL(imageResults[0].url)
+      .setAuthor("Evee", "https://i.imgur.com/AfFp7pu.png")
+      .setDescription("Here is what you looking for!")
+      .setImage(imageResults[0].url)
+      .setTimestamp();
+    await interaction.editReply({ content: " ", embeds: [embed] });
   },
 };
