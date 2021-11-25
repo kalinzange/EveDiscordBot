@@ -1,19 +1,30 @@
-const Scraper = require('images-scraper');
+const Scraper = require("images-scraper");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 
 const google = new Scraper({
-    puppeteer: {
-        headless: true
-    }
-})
+  puppeteer: {
+    headless: true,
+  },
+});
 
 module.exports = {
-    name: 'image',
-    description: 'Searches for an image',
-    async execute(message, args, client, Discord) {
-        const imageQuery = args.join(' ');
-        if(!imageQuery) return message.channel.send('Escolhe uma imagem');
-
-        const imageResults = await google.scrape(imageQuery, 1);
-        message.channel.send(imageResults[0].url);
-    }
-}
+  data: new SlashCommandBuilder()
+    .setName("image")
+    .setDescription("Searches for an image!")
+    .addStringOption((option) =>
+      option
+        .setName("search")
+        .setDescription("Search something.")
+        .setRequired(true)
+    ),
+  async execute(interaction) {
+    await interaction.reply(
+      "Searching for **" + interaction.options.getString("search") + "**"
+    );
+    const imageResults = await google.scrape(
+      interaction.options.getString("search"),
+      1
+    );
+    await interaction.editReply(imageResults[0].url);
+  },
+};

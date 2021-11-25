@@ -1,0 +1,35 @@
+/*  async execute(message, args, client, Discord) {
+    if (!args.length)
+      return message.channel.send("Decidir entre o quê :unamused: ");
+    if (args.length < 2)
+      return message.channel.send("Preciso de mais variáveis :unamused: ");
+
+    const min = 0;
+    const max = args.length;
+
+    message.channel.send();
+  },
+};
+*/
+const { SlashCommandBuilder } = require("@discordjs/builders");
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName("decide")
+    .setDescription("Randomly decides between multiple options!")
+    .addStringOption((option) =>
+      option.setName("1").setDescription("asdas").setRequired(true)
+    )
+    .addStringOption((option) =>
+      option.setName("2").setDescription("asdas").setRequired(true)
+    )
+    .addStringOption((option) =>
+      option.setName("3").setDescription("asdas").setRequired(false)
+    ),
+  async execute(interaction) {
+    const min = 0;
+    const max = 3;
+    const decider = Math.floor(Math.random() * (max - min) + min);
+    await interaction.reply(interaction.option.getString("1"));
+  },
+};
