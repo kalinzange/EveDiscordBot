@@ -11,10 +11,17 @@ module.exports = {
         .setRequired(true)
     ),
   async execute(interaction) {
-    interaction.channel.bulkDelete(interaction.options.getInteger("integer"));
-    await interaction.reply({
-      content: "Done!",
-      ephemeral: true,
-    });
+    if (interaction.options.getInteger("integer") < 1) {
+      interaction.reply({
+        content: "Your number needs to be greater or equal to 1!",
+        ephemeral: true,
+      });
+    } else {
+      interaction.channel.bulkDelete(interaction.options.getInteger("integer"));
+      await interaction.reply({
+        content: "Done!",
+        ephemeral: true,
+      });
+    }
   },
 };
