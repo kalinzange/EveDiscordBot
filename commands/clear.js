@@ -18,8 +18,17 @@ module.exports = {
       });
     } else {
       interaction.channel.bulkDelete(interaction.options.getInteger("integer"));
+
+      var msg = "";
+
+      if (interaction.options.getInteger("integer") === 1) {
+        msg = " message!";
+      } else {
+        msg = " messages!";
+      }
+
       await interaction.reply({
-        content: "Done!",
+        content: "Cleared " + interaction.options.getInteger("integer") + msg,
         ephemeral: true,
       });
     }
