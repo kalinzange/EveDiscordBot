@@ -173,7 +173,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [forks-url]: https://github.com/kalinzange/EveDiscordBot/network/members
 [stars-shield]: https://img.shields.io/github/stars/kalinzange/EveDiscordBot.svg?style=for-the-badge
 [stars-url]: https://github.com/kalinzange/EveDiscordBot/stargazers
-[issues-shield]: https://img.shields.io/github/kalinzange/EveDiscordBot.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/kalinzange/EveDiscordBot.svg?style=for-the-badge
 [issues-url]: https://github.com/kalinzange/EveDiscordBot/issues
 [license-shield]: https://img.shields.io/github/license/kalinzange/EveDiscordBot.svg?style=for-the-badge
 [license-url]: https://github.com/kalinzange/EveDiscordBot/blob/main/LICENSE
