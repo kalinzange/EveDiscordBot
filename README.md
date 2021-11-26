@@ -124,11 +124,13 @@ To get a local copy up and running follow these simple example steps.
 <!-- PREREQUISITES -->
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Install Node JS version 16.6 or higher, and Discord JS version 13. After installing Node you can install Discord v13 by running the appropriate command in your terminal or command prompt.
+
+Discord JS
+
+```
+npm install discord.js
+```
 
 
 <!-- INSTALLATION -->
