@@ -150,8 +150,6 @@ _Below is an example of how you can instruct your audience on installing and set
    const API_KEY = 'ENTER YOUR API';
    ```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 <!-- USAGE -->
 ## Usage
@@ -167,8 +165,6 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
