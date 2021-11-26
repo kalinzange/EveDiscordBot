@@ -169,12 +169,12 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/kalinzange/EveDiscordBot.svg?style=for-the-badge
 [contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/kalinzange/EveDiscordBot.svg?style=for-the-badge
 [forks-url]: https://github.com/kalinzange/EveDiscordBot/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/kalinzange/EveDiscordBot.svg?style=for-the-badge
 [stars-url]: https://github.com/kalinzange/EveDiscordBot/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/kalinzange/EveDiscordBot.svg?style=for-the-badge
 [issues-url]: https://github.com/kalinzange/EveDiscordBot/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/kalinzange/EveDiscordBot.svg?style=for-the-badge
 [license-url]: https://github.com/kalinzange/EveDiscordBot/blob/main/LICENSE
 [product-screenshot]: assets/evee.png
