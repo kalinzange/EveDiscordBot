@@ -21,9 +21,9 @@
     Evee is an awesome discord bot made to cover all the needs in discord community such as fun, music and management!
     <br />
     <br />
-    <a href="https://discord.com/api/oauth2/authorize?client_id=775530325572976640&permissions=8&scope=applications.commands%20bot">Invite Evee To Your Server</a>
-    ·
     <a href="https://github.com/kalinzange/EveDiscordBot/issues">Report Bug</a>
+    ·
+    <a href="https://discord.com/api/oauth2/authorize?client_id=775530325572976640&permissions=8&scope=applications.commands%20bot">Invite Evee To Your Server</a>
     ·
     <a href="https://github.com/kalinzange/EveDiscordBot/issues">Request Feature</a>
   </p>
