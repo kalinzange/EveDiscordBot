@@ -4,10 +4,10 @@ const player = require("../client/player");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("resume")
-    .setDescription("resume the current song"),
+    .setDescription("Resume the current song!"),
   async execute(interaction) {
     const queue = player.getQueue(interaction.guildId);
     queue.setPaused(false);
-    interaction.reply("Resumed " + queue.current.title);
+    interaction.reply("Resumed **" + queue.current.title + "**");
   },
 };

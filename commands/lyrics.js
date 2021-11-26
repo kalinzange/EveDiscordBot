@@ -34,6 +34,7 @@ const createResponse = async (title) => {
       const isFirst = index === 0;
 
       return new MessageEmbed({
+        color: "#0099ff",
         title: isFirst ? `${data.title} - ${data.author}` : null,
         thumbnail: isFirst ? { url: data.thumbnail.genius } : null,
         description: value,
@@ -42,39 +43,37 @@ const createResponse = async (title) => {
 
     return { embeds };
   } catch (error) {
-    return "I am not able to find lyrics for this song :(";
+    return "I am not able to find lyrics for this song.";
   }
 };
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("lyrics")
-    .setDescription("display lyrics for the current song or a specific song")
+    .setDescription("Display lyrics for the current song or a specific song!")
     .addStringOption((option) =>
       option
         .setName("title")
-        .setDescription("specific song for lyrics")
+        .setDescription("Title of the music.")
         .setRequired(false)
     ),
 
   async execute(interaction) {
     const title = interaction.options.getString("title");
-    const sendLyrics = (songTitle) => {
-      return createResponse(songTitle)
-        .then((res) => {
-          console.log({ res });
-          interaction.reply(res);
-        })
-        .catch((err) => console.log({ err }));
+    const sendLyrics = async (songTitle) => {
+      try {
+        const res = await createResponse(songTitle);
+        interaction.reply(res);
+      } catch (err) {
+        return console.error({ err });
+      }
     };
 
     if (title) return sendLyrics(title);
 
     const queue = player.getQueue(interaction.guildId);
     if (!queue?.playing)
-      return interaction.reply({
-        content: "No music is currently being played",
-      });
+      return interaction.reply("There's no music being played.");
 
     return sendLyrics(queue.current.title);
   },

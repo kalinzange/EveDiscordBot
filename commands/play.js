@@ -2,7 +2,6 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 const { QueryType } = require("discord-player");
 const { MessageEmbed } = require("discord.js");
 const player = require("../client/player");
-const client = require("../main");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -23,9 +22,7 @@ module.exports = {
     );
 
     if (!interaction.member.voice.channel)
-      return interaction.followUp({
-        content: "Please join a voice channel first!",
-      });
+      return interaction.followUp("Please join a voice channel first!");
 
     const searchResult = await player.search(songTitle, {
       requestedBy: interaction.user,
@@ -43,10 +40,12 @@ module.exports = {
       ? queue.addTracks(searchResult.tracks)
       : queue.addTrack(searchResult.tracks[0]);
 
+    const lastTrack = queue.tracks.length - 1;
+
     const embed = new MessageEmbed()
       .setColor("#0099ff")
-      .setTitle("**" + queue.current.title + "**")
-      .setURL(queue.current.url)
+      .setTitle("**" + queue.tracks[lastTrack].title + "**")
+      .setURL(queue.tracks[lastTrack].url)
       .setAuthor(
         "Evee",
         "https://cdn.discordapp.com/avatars/775530325572976640/67386d9c99041abd20a890018ac2b497.png"
@@ -54,20 +53,20 @@ module.exports = {
       .addFields(
         {
           name: "Views",
-          value: queue.current.views.toLocaleString(),
+          value: queue.tracks[lastTrack].views.toLocaleString(),
           inline: true,
         },
         {
           name: "Duration",
-          value: queue.current.duration.toString(),
+          value: queue.tracks[lastTrack].duration.toString(),
           inline: true,
         }
       )
-      .setImage(queue.current.thumbnail)
+      .setImage(queue.tracks[lastTrack].thumbnail)
       .setTimestamp()
       .setFooter(
-        "Queued by " + queue.current.requestedBy.tag,
-        queue.current.requestedBy.displayAvatarURL()
+        "Queued by " + queue.tracks[lastTrack].requestedBy.tag,
+        queue.tracks[lastTrack].requestedBy.displayAvatarURL()
       );
 
     interaction.editReply({ content: " ", embeds: [embed] });
