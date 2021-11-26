@@ -8,6 +8,13 @@ module.exports = {
   execute(client, commands) {
     console.log("Evee is online");
 
+    client.use;
+
+    client.user.setPresence({
+      activities: [{ name: "your requests!", type: "LISTENING" }],
+      status: "online",
+    });
+
     const CLIENT_ID = client.user.id;
 
     const rest = new REST({
