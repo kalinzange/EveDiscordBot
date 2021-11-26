@@ -1,38 +1,3 @@
-# EveeDiscordBot
-
-- Requirements:
-
-	- Discord.js / Rest / Discord API Types / Builders
-
- 	```
- 	npm install discord.js @discordjs/rest discord-api-types @discordjs/builders
- 	```
-	
-	- dotenv
-
-	```
- 	npm install dotenv
- 	```
-
-	- Images-Scraper
-	
-	```
-	npm install images-scraper
-	```
- 
-## Event Handler
-
-- Requirements:
-
-	- FS
-
-	```
-	npm install fs
-	```
-
-
-
-
 <div id="top"></div>
 
 <!-- PROJECT SHIELDS -->
@@ -53,16 +18,14 @@
   <h3 align="center">Evee Discord Bot</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    Evee is an awesome discord bot made to cover all the needs in discord community such as fun, music and management!
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://discord.com/api/oauth2/authorize?client_id=775530325572976640&permissions=8&scope=applications.commands%20bot">Invite Evee To Your Server</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/kalinzange/EveDiscordBot/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/kalinzange/EveDiscordBot/issues">Request Feature</a>
   </p>
 </div>
 
@@ -84,7 +47,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -117,8 +79,7 @@ Use the `BLANK_README.md` to get started.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+In case you want to run this code in your computer make sure you follow this guide in the right order and everything should work just fine.
 
 
 <!-- PREREQUISITES -->
@@ -136,29 +97,21 @@ npm install discord.js
 <!-- INSTALLATION -->
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+_This are the steps you must follow in order to make your bot work in your computer._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repository
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+3. Create and config the `.env` file   
    ```
-
-
-<!-- USAGE -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+   TOKEN=Bot Token Here
+   GUILD_ID=Your Guild ID
+   ```
 
 
 <!-- LICENSE -->
