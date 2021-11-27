@@ -7,6 +7,7 @@ module.exports = {
   once: true,
   execute(client, commands) {
     console.log("Evee is online");
+
     client.use;
 
     const serverCount = client.guilds.cache.size;
@@ -22,12 +23,7 @@ module.exports = {
       client.user.setPresence({
         activities: [{ name: `${status}`, type: "WATCHING" }],
       });
-    }, 5000);
-
-    /*client.user.setPresence({
-      activities: [{ name: serverCount + " servers!", type: "WATCHING" }],
-      status: "online",
-    });*/
+    }, 15000);
 
     const CLIENT_ID = client.user.id;
 
