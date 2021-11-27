@@ -108,7 +108,7 @@ _This are the steps you must follow in order to make your bot work in your compu
    GUILD_ID=Your Guild ID
    ENV=production
    ```
-Only use `ENV` variable equals to `production` when you intend to deploy the commands to all the servers that the bot are in, otherwise leave it blank. If you are editing and testing new features with the bot **DO NOT** asign the variable to `production`.  
+Only use `ENV` variable equals to `production` when you intend to deploy the commands to all the servers that the bot are in, otherwise leave it blank. If you are editing and testing new features with the bot **DO NOT** assign the variable to `production`.  
 
 <!-- LICENSE -->
 ## License
