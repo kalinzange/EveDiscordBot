@@ -95,19 +95,20 @@ npm install discord.js
 _This are the steps you must follow in order to make your bot work in your computer._
 
 1. Clone the repository
-   ```sh
+   ```
    git clone https://github.com/kalinzange/EveDiscordBot.git
    ```
 2. Install NPM packages
-   ```sh
+   ```
    npm install
    ```
 3. Create and config the `.env` file   
    ```
    TOKEN=Bot Token Here
    GUILD_ID=Your Guild ID
+   ENV=production
    ```
-
+Only use `ENV` variable equals to `production` when you intend to deploy the commands to all the servers that the bot are in, otherwise leave it blank. If you are editing and testing new features with the bot **DO NOT** assign the variable to `production`.  
 
 <!-- LICENSE -->
 ## License
