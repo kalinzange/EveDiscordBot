@@ -18,7 +18,7 @@
   <h3 align="center">Evee Discord Bot</h3>
 
   <p align="center">
-    Evee is an awesome discord bot made to cover all the needs in discord community such as *fun*, music and management!
+    Evee is an awesome discord bot made to cover all the needs in discord community such as **fun**, music and management!
     <br />
     <br />
     <a href="https://github.com/kalinzange/EveDiscordBot/issues">Report Bug</a>
