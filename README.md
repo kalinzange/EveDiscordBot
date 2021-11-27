@@ -96,7 +96,7 @@ _This are the steps you must follow in order to make your bot work in your compu
 
 1. Clone the repository
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/kalinzange/EveDiscordBot.git
    ```
 2. Install NPM packages
    ```sh
