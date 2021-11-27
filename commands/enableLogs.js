@@ -7,7 +7,7 @@ module.exports = {
     .setDescription("Will create a new channel for logs!"),
   async execute(interaction) {
     if (interaction.user.id != interaction.guild.ownerId)
-      interaction.reply(
+      return interaction.reply(
         "You must be the owner of the server to use this command!"
       );
 
@@ -16,7 +16,7 @@ module.exports = {
         (channelName) => channelName.name === "evee-logs"
       )
     ) {
-      interaction.reply(
+      return interaction.reply(
         "There's already a channel with the name **evee-logs**, Evee is sending all of the logs to this channel!"
       );
     } else {
