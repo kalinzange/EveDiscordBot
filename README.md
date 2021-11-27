@@ -55,8 +55,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 There are many great Discord Bots that have really cool features; however, we didn't find one that covered all of our needs so we started to develop Evee in order to just have 1 bot on our server that can do what would take 5 bots to do.
 
 Why should you add Evee to your Discord server? Here's why:
@@ -129,4 +127,3 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [issues-url]: https://github.com/kalinzange/EveDiscordBot/issues
 [license-shield]: https://img.shields.io/github/license/kalinzange/EveDiscordBot.svg?style=for-the-badge
 [license-url]: https://github.com/kalinzange/EveDiscordBot/blob/main/LICENSE
-[product-screenshot]: assets/evee.png
