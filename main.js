@@ -13,17 +13,21 @@ const client = new Client({
 module.exports = client;
 
 // Command Handler
-const commandFiles = fs
-  .readdirSync("./commands")
-  .filter((file) => file.endsWith(".js"));
-
-const commands = [];
 client.commands = new Collection();
+const commands = [];
 
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  commands.push(command.data.toJSON());
-  client.commands.set(command.data.name, command);
+const commandFolders = fs.readdirSync("./commands");
+
+for (const folder of commandFolders) {
+  const commandFiles = fs
+    .readdirSync(`./commands/${folder}`)
+    .filter((file) => file.endsWith(".js"));
+
+  for (const file of commandFiles) {
+    const command = require(`./commands/${folder}/${file}`);
+    commands.push(command.data.toJSON());
+    client.commands.set(command.data.name, command);
+  }
 }
 
 // Event Handler
