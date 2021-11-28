@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { QueryType } = require("discord-player");
 const { MessageEmbed } = require("discord.js");
-const player = require("../client/player");
+const player = require("../../client/player");
 
 module.exports = {
   data: new SlashCommandBuilder()

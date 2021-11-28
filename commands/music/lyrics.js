@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageEmbed } = require("discord.js");
-const player = require("../client/player");
+const player = require("../../client/player");
 const axios = require("axios");
 
 const getLyrics = (title) =>
