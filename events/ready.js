@@ -16,7 +16,10 @@ module.exports = {
       0
     );
 
-    const activities = [serverCount + " servers!", userCount + " users!"];
+    const activities = [
+      serverCount + " servers! |  /help",
+      userCount + " users! |  /help",
+    ];
 
     setInterval(() => {
       const status = activities[Math.floor(Math.random() * activities.length)];
