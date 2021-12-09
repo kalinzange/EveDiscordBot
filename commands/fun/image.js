@@ -38,7 +38,10 @@ module.exports = {
           "** 🔍"
       )
       .setURL(imageResults[0].url)
-      .setAuthor("Evee", "https://i.imgur.com/AfFp7pu.png")
+      .setAuthor(
+        "Evee",
+        "https://cdn.discordapp.com/avatars/775530325572976640/67386d9c99041abd20a890018ac2b497.png"
+      )
       .setDescription("Here is what you looking for!")
       .setImage(imageResults[0].url)
       .setTimestamp();
