@@ -1,18 +1,26 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
+const { Message } = require("discord.js");
 const client = require("../../main.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("enable-logs")
     .setDescription("Will create a new channel for logs!"),
-  async execute(interaction) {
+  /**
+   *
+   * @param {Message} message
+   */
+  async execute(interaction, message) {
     if (interaction.user.id != interaction.guild.ownerId)
       return interaction.reply(
         "You must be the owner of the server to use this command!"
       );
 
+    const serverId = message.guild.id;
+    console.log(serverId);
+
     if (
-      client.channels.cache.find(
+      client.guilds.channels.cache.find(
         (channelName) => channelName.name === "evee-logs"
       )
     ) {

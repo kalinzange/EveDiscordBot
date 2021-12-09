@@ -19,6 +19,7 @@ module.exports = {
     )
       return;
 
+    const serverId = newMessage.guild.id;
     const max = 1950;
 
     const original =
