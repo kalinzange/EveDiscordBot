@@ -16,11 +16,8 @@ module.exports = {
         "You must be the owner of the server to use this command!"
       );
 
-    const serverId = message.guild.id;
-    console.log(serverId);
-
     if (
-      client.guilds.channels.cache.find(
+      client.channels.cache.find(
         (channelName) => channelName.name === "evee-logs"
       )
     ) {
@@ -29,7 +26,7 @@ module.exports = {
       );
     } else {
       // Creating Evee Logs Channel
-      interaction.guild.channels
+      interaction.guilds.channels
         .create("evee-logs", { reason: "Needed a channel to send the logs!" })
         .catch(console.error);
       interaction.reply(
