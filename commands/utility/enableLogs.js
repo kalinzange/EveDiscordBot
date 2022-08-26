@@ -1,37 +1,65 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Message } = require("discord.js");
-const client = require("../../main.js");
+const { Permissions } = require("discord.js");
+const GuildSettings = require("../../models/guildSettingsSchema");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("enable-logs")
-    .setDescription("Will create a new channel for logs!"),
-  /**
-   *
-   * @param {Message} message
-   */
-  async execute(interaction, message) {
-    if (interaction.user.id != interaction.guild.ownerId)
-      return interaction.reply(
-        "You must be the owner of the server to use this command!"
-      );
-
+    .setName("set-logs-channel")
+    .setDescription("Will create a new channel for logs")
+    .addChannelOption((option) =>
+      option
+        .setName("logs")
+        .setDescription(
+          "Channel where your edit and delete messages will be logged"
+        )
+        .setRequired(true)
+    ),
+  async execute(interaction) {
     if (
-      client.channels.cache.find(
-        (channelName) => channelName.name === "evee-logs"
-      )
+      !interaction.member.permissions.has([Permissions.FLAGS.ADMINISTRATOR])
     ) {
-      return interaction.reply(
-        "There's already a channel with the name **evee-logs**, Evee is sending all of the logs to this channel!"
-      );
-    } else {
-      // Creating Evee Logs Channel
-      interaction.guilds.channels
-        .create("evee-logs", { reason: "Needed a channel to send the logs!" })
-        .catch(console.error);
-      interaction.reply(
-        "\n \n The channel **evee-logs** was created and logs will be sent there, we recommend you to make this channel private!"
-      );
+      return interaction.reply({
+        content: "You do not have the permissions to use this command.",
+        ephemeral: true,
+      });
     }
+
+    GuildSettings.findOne(
+      { guild_id: interaction.guild.id },
+      (err, settings) => {
+        if (err) {
+          console.error(err);
+          return interaction.reply({
+            content: "An error occurred while executing that command.",
+            ephemeral: true,
+          });
+        }
+
+        if (!settings) {
+          settings = new GuildSettings({
+            guild_id: interaction.guild.id,
+            logs_channel_id: interaction.options.getChannel("logs").id,
+          });
+        } else {
+          settings.logs_channel_id = interaction.options.getChannel("logs").id;
+        }
+
+        settings.save((err) => {
+          if (err) {
+            console.error(err);
+            return interaction.reply({
+              content: "An error occurred while executing that command.",
+              ephemeral: true,
+            });
+          }
+
+          interaction.reply(
+            `Logs channel has been set to ${interaction.options.getChannel(
+              "logs"
+            )}!`
+          );
+        });
+      }
+    );
   },
 };
